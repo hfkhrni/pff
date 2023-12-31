@@ -1,5 +1,5 @@
 // 'use client';
-import { Button } from '@/src/ui/button';
+import { Button } from '@/components/ui/button';
 import MaxWidthWrapper from './_components/max-width-wrapper';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
