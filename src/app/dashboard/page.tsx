@@ -1,5 +1,7 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
+import { db } from '@/db';
+import Dashboard from '@/app/_components/dashboard';
 
 async function Page() {
   const { getUser } = getKindeServerSession();
@@ -7,14 +9,15 @@ async function Page() {
 
   if (!user || !user.id) redirect('/auth-callback?origin=dashboard');
 
-  return (
-    <>
-      <h1>
-        {user?.email}
-        {user?.id}
-      </h1>
-    </>
-  );
+  const dbUser = await db.user.findFirst({
+    where: {
+      id: user.id,
+    },
+  });
+
+  if (!dbUser) redirect('/auth-callback?origin=dashboard');
+
+  return <Dashboard />;
 }
 
 export default Page;
