@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config = {
+  mode: 'jit',
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -18,10 +19,11 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        serif: ['var(--font-newsreader)'],
-      },
       colors: {
+        wyw: {
+          100: '#eeebe2',
+          200: '#080909',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -77,7 +79,7 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [require('tailwindcss-animate')],
 } satisfies Config;
 
 export default config;

@@ -5,8 +5,11 @@
     "source.fixAll.eslint": "explicit",
     "source.addMissingImports": "explicit"
   },
-
+  "json.schemaDownload.enable": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }
