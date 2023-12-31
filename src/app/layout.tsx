@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, Newsreader } from 'next/font/google';
 import './globals.css';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/lib/utils';
+import Providers from './_components/providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,17 +25,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          'font-sans antialiased grainy',
-          inter.className,
-          newsreader.variable
-        )}
-      >
-        {children}
-      </body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body
+          className={cn(
+            'font-sans antialiased',
+            inter.className,
+            newsreader.variable
+          )}
+        >
+          {children}
+        </body>
+      </html>
+    </Providers>
   );
 }
 
