@@ -1,6 +1,6 @@
 // 'use client';
 import { Button } from '@/components/ui/button';
-import MaxWidthWrapper from './_components/max-width-wrapper';
+import MaxWidthWrapper from './(main)/_components/max-width-wrapper';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';

@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { trpc } from '@/app/_trpc/client';
+// import { trpc } from '@/app/_trpc/client';
 import { Loader2 } from 'lucide-react';
+import { trpc } from '@/app/(main)/_trpc/client';
 
 const Page = () => {
   const router = useRouter();

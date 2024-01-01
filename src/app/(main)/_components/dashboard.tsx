@@ -1,6 +1,6 @@
 'use client';
 
-import { trpc } from '@/app/_trpc/client';
+import { trpc } from '@/app/(main)/_trpc/client';
 import UploadButton from './upload-button';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';

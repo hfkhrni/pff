@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { JetBrains_Mono, Inter, Newsreader } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
-import Providers from './_components/providers';
+import Providers from './(main)/_components/providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
