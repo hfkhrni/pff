@@ -47,14 +47,6 @@ function UploadButton({
         hi
       </DialogContent>
     </Dialog>
-    //   <div>
-    //     <Button
-    //       variant="default"
-    //       className="h-8 rounded-sm font-mono"
-    //     >
-    //       Upload
-    //     </Button>
-    //   </div>
   );
 }
 
