@@ -19,6 +19,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['var(--font-newsreader)'],
+        mono: ['var(--font-jetbrains)'],
+      },
       colors: {
         wyw: {
           100: '#eeebe2',

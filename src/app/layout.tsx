@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Newsreader } from 'next/font/google';
+import { JetBrains_Mono, Inter, Newsreader } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Providers from './_components/providers';
@@ -10,6 +10,14 @@ const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-newsreader',
+  weight: ['300', '400', '500', '700'],
+  adjustFontFallback: false,
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains',
   weight: ['300', '400', '500', '700'],
   adjustFontFallback: false,
 });
@@ -31,7 +39,8 @@ export default function RootLayout({
           className={cn(
             'font-sans antialiased',
             inter.className,
-            newsreader.variable
+            newsreader.variable,
+            jetbrains.variable
           )}
         >
           {children}
