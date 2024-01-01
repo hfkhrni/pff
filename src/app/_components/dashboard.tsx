@@ -14,16 +14,28 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import { useState } from 'react';
 
 function Dashboard() {
+  const [deleting, setDeleting] = useState<string | null>('null');
+  const utils = trpc.useUtils();
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    onSuccess: () => {
+      utils.getUserFiles.invalidate();
+    },
+    onMutate: ({ id }) => {
+      setDeleting(id);
+    },
+    onSettled() {
+      setDeleting(null);
+    },
+  });
   return (
     <>
       <main className="mx-auto min-w-96 max-w-screen-xl p-4">
         <div className="mt-8 flex flex-row items-start justify-between gap-4 border-b border-primary pb-5 sm:flex-row sm:items-center sm:gap-0">
           <h1 className="font-mono">FILES</h1>
-          {/* <p className="text-wyw-200">hi</p> */}
-
           <UploadButton />
         </div>
         {files && files.length !== 0 ? (
@@ -45,36 +57,42 @@ function Dashboard() {
                   >
                     <h3 className="truncate">{file.name}</h3>
                   </Link>
-                  <div className="flex items-center gap-2">
-                    <div className="">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger
-                          asChild
-                          onClick={(event) => event.stopPropagation()}
+                  <div className="flex items-center justify-center gap-2">
+                    {deleting === file.id && (
+                      <p className="text-xs">DELETING</p>
+                    )}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        asChild
+                        onClick={(event) => {
+                          event.stopPropagation();
+                        }}
+                      >
+                        <div
+                          role="button"
+                          className="flex h-full w-6 justify-center rounded-sm opacity-100 group-hover:bg-background"
                         >
-                          <div
-                            role="button"
-                            className="flex h-full w-6 justify-center rounded-sm opacity-100 group-hover:bg-background"
-                          >
-                            <MoreHorizontal className="h-4 w-4 text-primary hover:text-primary" />
-                          </div>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                          className="mr-2 w-20 bg-background"
-                          align="start"
-                          side="bottom"
-                          forceMount
+                          <MoreHorizontal className="h-4 w-4 text-primary hover:text-primary" />
+                        </div>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        className="mr-2 w-20 bg-background"
+                        align="start"
+                        side="bottom"
+                        forceMount
+                      >
+                        <DropdownMenuItem
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            deleteFile({ id: file.id });
+                          }}
+                          className="font-mono"
                         >
-                          <DropdownMenuItem
-                            onClick={() => {}}
-                            className="font-mono"
-                          >
-                            <Trash className="mr-2 h-4 w-4" />
-                            Archive
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
+                          <Trash className="mr-2 h-4 w-4" />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </li>
               ))}
