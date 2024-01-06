@@ -3,6 +3,7 @@ import { JetBrains_Mono, Inter, Newsreader } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Providers from './(main)/_components/providers';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -43,6 +44,8 @@ export default function RootLayout({
             jetbrains.variable
           )}
         >
+          <Toaster />
+
           {children}
         </body>
       </html>
