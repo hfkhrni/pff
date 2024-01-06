@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import UploadDropzone from './upload-dropzone';
 
 function UploadButton({
   buttonVariant,
@@ -43,8 +44,8 @@ function UploadButton({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="rounded-none font-mono sm:max-w-[425px]">
-        hi
+      <DialogContent className="mx-auto w-[95vw] rounded-sm font-mono sm:max-w-[25vw]">
+        <UploadDropzone />
       </DialogContent>
     </Dialog>
   );
