@@ -7,7 +7,7 @@ import Dropzone from 'react-dropzone';
 import { useToast } from '@/components/ui/use-toast';
 
 import { useUploadThing } from '@/lib/uploadthing';
-import { trpc } from '@/app/(main)/_trpc/client';
+import { trpc } from '@/app/_trpc/client';
 import { useRouter } from 'next/navigation';
 
 function UploadDropzone() {

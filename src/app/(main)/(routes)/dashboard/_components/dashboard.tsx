@@ -1,6 +1,6 @@
 'use client';
 
-import { trpc } from '@/app/(main)/_trpc/client';
+import { trpc } from '@/app/_trpc/client';
 import UploadButton from './upload-button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { MoreHorizontal, Trash } from 'lucide-react';
