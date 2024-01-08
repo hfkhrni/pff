@@ -28,7 +28,7 @@ function FilesList({ files }: { files: Files }) {
         >
           <Link
             href={`/dashboard/${file.id}`}
-            className="w-full"
+            className="w-[calc(100%-2rem)]"
           >
             <h3 className="truncate">{file.name}</h3>
           </Link>
