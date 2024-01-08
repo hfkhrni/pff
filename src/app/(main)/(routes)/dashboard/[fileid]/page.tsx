@@ -27,22 +27,20 @@ async function Page({ params }: PageProps) {
 
   if (!file) notFound();
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-1 flex-col justify-between">
-      <div className="mx-auto w-full max-w-screen-xl px-4 py-6 lg:flex xl:px-2">
+    <div className="mx-auto flex h-[calc(100vh-3.5rem)] max-w-screen-xl flex-1 flex-col justify-between">
+      <div className="mx-auto h-full w-full px-4 py-6 lg:flex xl:px-2">
         {/* Left sidebar & main wrapper */}
         <div className="flex-1 xl:flex">
-          <div className=" sm:px-6 lg:pl-8 xl:flex-1 xl:pl-6">
+          <div className="mb-4 lg:pr-4 xl:flex-1">
             {/* Main area */}
-            {/* <PDFRenderer url={file.url} /> */}
-            <h1>jhi</h1>
+            <PDFRenderer url={file.url} />
           </div>
         </div>
-        <div className="flex-[0.75] shrink-0 border-t border-primary lg:w-96 lg:border-l lg:border-t-0">
-          {/* <ChatWrapper
-            isSubscribed={plan.isSubscribed}
-            fileId={file.id}
-          /> */}
-          <>dummy</>
+        <div className="lg:flex">
+          <div className="border-t border-secondary lg:border-l lg:border-t-0"></div>
+        </div>
+        <div className="mt-2 flex-[0.75] shrink-0 lg:ml-4 lg:mt-0">
+          <ChatWrapper />
         </div>
       </div>
     </div>
