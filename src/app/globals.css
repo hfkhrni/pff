@@ -45,6 +45,29 @@
   }
 }
 
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
+.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+  --bg-opacity: 0.5;
+  background-color: #c9c5b6;
+}
+
+.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+  --bg-opacity: 0.5;
+  background-color: #13131374;
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+}
+
+.scrolling-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
 /* #eeebe2: hsla(45, 26%, 91%, 1)  */
 /* bg color, v light green */
 
