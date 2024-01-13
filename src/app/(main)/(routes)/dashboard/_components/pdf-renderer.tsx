@@ -15,7 +15,7 @@ import {
   ScanEye,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { KeyboardEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -43,7 +43,7 @@ function PDFRenderer({ url }: { url: string }) {
   const [numPages, setNumPages] = useState<number>();
   const [currPage, setCurrPage] = useState<number>(1);
   const [scale, setScale] = useState<number>(1);
-  const { ref, width } = useResizeDetector();
+  const { ref, width, height } = useResizeDetector();
   const [renderedScale, setRenderedScale] = useState<number | null>(null);
   const isLoading = renderedScale !== scale;
 
@@ -73,7 +73,7 @@ function PDFRenderer({ url }: { url: string }) {
     setValue('page', String(page));
   };
   return (
-    <div className="flex flex-col items-center rounded-sm bg-secondary font-mono">
+    <div className="flex h-full flex-col items-center rounded-sm bg-secondary font-mono">
       {/* h-full can be added here */}
       <div className="m-2 flex w-[calc(100%-1rem)] items-center justify-between rounded-sm bg-background px-2">
         <div className="flex items-center gap-1">
@@ -212,6 +212,7 @@ function PDFRenderer({ url }: { url: string }) {
               <Page
                 className={cn(isLoading ? 'hidden' : '')}
                 width={width ? width : 1}
+                height={height ? height : 1}
                 scale={scale}
                 pageNumber={currPage}
                 key={'#' + scale}
