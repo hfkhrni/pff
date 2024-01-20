@@ -28,13 +28,14 @@ function ChatContextProvider({ fileId, children }: Props) {
 
   const { mutate: sendMessage } = useMutation({
     mutationFn: async ({ message }: { message: string }) => {
-      const repsonse = await fetch('api/message', {
+      const response = await fetch('/api/message', {
         method: 'POST',
         body: JSON.stringify({ fileId, message }),
       });
-      if (!repsonse.ok) {
+      if (!response.ok) {
         throw new Error('failed to send message');
       }
+      return response.body;
     },
   });
 
@@ -48,10 +49,10 @@ function ChatContextProvider({ fileId, children }: Props) {
   return (
     <chatContext.Provider
       value={{
-        message: '',
-        addMessage: () => {},
-        handleInputChange: () => {},
-        isLoading: false,
+        message,
+        addMessage,
+        handleInputChange,
+        isLoading,
       }}
     >
       {children}
