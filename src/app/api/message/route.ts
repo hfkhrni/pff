@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { pinecone } from '@/lib/pinecone';
-import { messageValidator } from '@/lib/validators/message-validator';
+import { MessageValidator } from '@/lib/validators/message-validator';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   const userId = user?.id;
   if (!userId) return new Response('Unauthorized', { status: 401 });
 
-  const { fileId, message } = messageValidator.parse(body);
+  const { fileId, message } = MessageValidator.parse(body);
 
   const file = await db.file.findFirst({
     where: {
@@ -29,17 +29,17 @@ export async function POST(req: NextRequest) {
 
   await db.message.create({
     data: {
-      userId,
-      fileId,
       text: message,
       isUserMessage: true,
+      userId,
+      fileId,
     },
   });
 
+  // 1: vectorize message
   const embeddings = new OpenAIEmbeddings({
     openAIApiKey: process.env.OPENAI_API_KEY,
   });
-
   const pineconeIndex = pinecone.Index('pff');
   const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
     pineconeIndex,
