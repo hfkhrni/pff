@@ -6,14 +6,7 @@ import { useResizeDetector } from 'react-resize-detector';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronUp,
-  Fullscreen,
-  Plus,
-  ScanEye,
-} from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
@@ -29,7 +22,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuShortcut,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import SimpleBar from 'simplebar-react';
@@ -73,7 +65,7 @@ function PDFRenderer({ url }: { url: string }) {
     setValue('page', String(page));
   };
   return (
-    <div className="flex h-full flex-col items-center rounded-sm bg-secondary font-mono">
+    <div className="flex h-full min-h-80 flex-col items-center rounded-sm bg-secondary font-mono">
       {/* h-full can be added here */}
       <div className="m-2 flex w-[calc(100%-1rem)] items-center justify-between rounded-sm bg-background px-2">
         <div className="flex items-center gap-1">
