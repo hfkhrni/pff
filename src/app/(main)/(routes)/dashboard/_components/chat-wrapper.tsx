@@ -6,6 +6,7 @@ import { trpc } from '@/app/_trpc/client';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import ChatContextProvider from './chat-context';
 function ChatWrapper({ fileId }: { fileId: string }) {
   const { data, isLoading } = trpc.getFileUploadStatus.useQuery(
     {
@@ -19,7 +20,7 @@ function ChatWrapper({ fileId }: { fileId: string }) {
 
   if (isLoading)
     return (
-      <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-background rounded-sm bg-secondary p-4">
+      <div className="relative flex min-h-80 flex-col justify-between gap-2 divide-y divide-background rounded-sm bg-secondary p-4 sm:min-h-full">
         <div className="flex flex-1 flex-col items-center justify-center">
           <p className="font-mono">LOADING</p>
         </div>
@@ -57,13 +58,14 @@ function ChatWrapper({ fileId }: { fileId: string }) {
       </div>
     );
   return (
-    <div className="relative flex h-80 min-h-full flex-col justify-between gap-2 divide-y divide-background/70 rounded-sm bg-secondary p-4">
-      <div className="mb-28 flex-1 flex-col justify-between">
-        hi
-        <Messages />
+    <ChatContextProvider fileId={fileId}>
+      <div className="relative flex min-h-full flex-col justify-between gap-2 divide-y divide-background/70 rounded-sm bg-secondary p-2">
+        <div className="mb-14 flex-1 flex-col justify-between">
+          <Messages fileId={fileId} />
+        </div>
+        <ChatInput />
       </div>
-      <ChatInput />
-    </div>
+    </ChatContextProvider>
   );
 }
 
