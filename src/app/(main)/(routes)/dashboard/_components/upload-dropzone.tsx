@@ -92,7 +92,7 @@ function UploadDropzone() {
               className="flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-sm bg-secondary/50 hover:bg-secondary"
             >
               <div className="mt-2 flex flex-col items-center justify-center py-6">
-                <p className="mb-2 font-mono text-sm">
+                <p className="mx-2 mb-2 text-center font-mono text-sm">
                   CLICK OR DRAG TO UPLOAD
                 </p>
                 <p className="mb-2 font-mono text-xs text-muted-foreground">
@@ -100,6 +100,7 @@ function UploadDropzone() {
                 </p>
               </div>
               <input
+                disabled={isUploading}
                 {...getInputProps()}
                 type="file"
                 id="dropzone-file"
