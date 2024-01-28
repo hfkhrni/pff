@@ -13,7 +13,6 @@ import { useToast } from '@/components/ui/use-toast';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import page from '../page';
 import { cn } from '@/lib/utils';
 
 import {
@@ -175,7 +174,7 @@ function PDFRenderer({ url }: { url: string }) {
       <div className="max-h-screen w-[calc(100vw-4rem)] flex-1 sm:w-[calc(100%-2rem)]">
         <SimpleBar
           autoHide={false}
-          className="max-h-[calc(100vh-24rem)] sm:max-h-[calc(100vh-16rem)]"
+          className="mt-1 max-h-[calc(100vh-24rem)] sm:max-h-[calc(100vh-11rem)]"
         >
           <div ref={ref}>
             <Document
