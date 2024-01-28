@@ -3,17 +3,16 @@
 import { trpc } from '@/app/_trpc/client';
 import UploadButton from './upload-button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { MoreHorizontal, Trash } from 'lucide-react';
-
-import Link from 'next/link';
-import { useState } from 'react';
 import FilesList from './files-list';
+import Navbar from '@/app/(main)/_components/navbar';
 
 function Dashboard() {
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
 
   return (
     <>
+      <Navbar />
+
       <main className="mx-auto max-w-screen-xl p-4">
         <div className="mt-8 flex flex-row items-start justify-between gap-4 border-b border-primary pb-5 sm:flex-row sm:items-center sm:gap-0">
           <h1 className="font-mono">FILES</h1>
