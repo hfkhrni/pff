@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 import Providers from './(main)/_components/providers';
 import { Toaster } from '@/components/ui/toaster';
 import 'simplebar-react/dist/simplebar.min.css';
-import Navbar from './(main)/_components/navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -47,7 +46,6 @@ export default function RootLayout({
           )}
         >
           <Toaster />
-          <Navbar />
           {children}
         </body>
       </html>
