@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+PFF lets you upload pdf files and ask an LLM (currently ChatGPT) questions in a chat interface about the pdf's materials. It's [live](https://pff-hazel.vercel.app/), you can make an account and started using it.
 
-## Getting Started
+## Run Locally
 
-First, run the development server:
+clone the repo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/hfkhrni/pff.git
+```
+`cd` into the repo's folder and run `pnpm install`
+
+run a deveopment server 
+
+```bash
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+rename the `.env.example` file to `.env` after filling it out
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+pinecone requires the index name as a string and you'll need to put your index name in `src/app/api/message/route.ts` and `src/app/api/uploadthing/core.ts` where the index variable is declared
+```typescript
+  const pineconeIndex = pinecone.Index('index name here');
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Other Filetypes
 
-## Learn More
+you can use this for files other than pdfs, there are 3 parts to this:
 
-To learn more about Next.js, take a look at the following resources:
+1. change the filetype allowed in uploadthing's endpoint in `src/app/api/uploadthing/core.ts`
+```typescript
+export const ourFileRouter = {
+  pdfUploader: f({ "file-type-here": { maxFileSize: '<number>MB' } })
+}
+```
+2. pdfs are rendered by the `<PDFRenderer />` component inside `<ChatWrapper />`, you'll need to create a component that views your file next to the chat if you need that.
+3. configure the prompt in `src/app/api/message/route.ts` to suite the filetype you're querying
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Replace ChatGPT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+there's only one endpoint which calls ChatGPT's API with the embeddings and gets back a streaming response. this endpoint is `src/app/api/message/route.ts`.
 
-## Deploy on Vercel
+you will need to get embeddings from the model you're using in replacement of:
+```typescript
+  const embeddings = new OpenAIEmbeddings({
+    openAIApiKey: process.env.OPENAI_API_KEY,
+  });
+```
+and where you call the api:
+```typescript
+  const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  const response = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    temperature: 0,
+    stream: true,
+    messages: []
+})
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
